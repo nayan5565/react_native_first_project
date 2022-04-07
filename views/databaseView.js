@@ -240,7 +240,7 @@ const DatabaseView = ({ navigation }) => {
     return (
 
 
-        <View style={{ marginTop: 12, flex: 1 }}>
+        <View style={{ marginTop: 12 }}>
             <Modal
                 animationType="slide"
                 transparent={true}
