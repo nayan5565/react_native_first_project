@@ -91,6 +91,15 @@ module.exports = {
         padding: 10,
         elevation: 2
     },
+
+    buttonItem: {
+        width: 56,
+        height: 28,
+        borderRadius: 8,
+        justifyContent: 'center',
+        padding: 5,
+        elevation: 2
+    },
     buttonOpen: {
         backgroundColor: "#F194FF",
     },
@@ -104,6 +113,8 @@ module.exports = {
     textStyle: {
         color: "white",
         fontWeight: "bold",
+        fontSize: 10,
+        justifyContent: 'center',
         textAlign: "center"
     },
 }

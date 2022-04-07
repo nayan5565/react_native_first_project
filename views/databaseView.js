@@ -20,7 +20,8 @@ const DatabaseView = ({ navigation }) => {
     const [nameUpdate, onChangeNameUpdate] = useState("");
     const [phoneUpdate, onChangePhoneUpdate] = useState('');
     const [id, setId] = useState('');
-    const [nameFromDB, setName] = useState('');
+    const [bloodGroupUpdate, onChangeGroupUpdate] = useState('');
+    const [bloodGroup, onChangeGroup] = useState('');
     const [data, setData] = useState([]);
 
     const onLogin = async (email, password) => {
@@ -35,7 +36,7 @@ const DatabaseView = ({ navigation }) => {
         db.transaction((tx) => {
             tx.executeSql("CREATE TABLE IF NOT EXISTS "
                 + "Users "
-                + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Phone TEXT);"
+                + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, bloodGroup TEXT, Phone TEXT);"
             )
         })
     }
@@ -68,7 +69,7 @@ const DatabaseView = ({ navigation }) => {
     }
 
     const saveData = async () => {
-        if (!name || !phone) {
+        if (!name || !phone || !bloodGroup) {
             alert('enter name and phone');
             return false;
         }
@@ -76,12 +77,13 @@ const DatabaseView = ({ navigation }) => {
         console.log('name: ' + name + 'phone: ' + phone);
         await db.transaction(async (tx) => {
 
-            await tx.executeSql("INSERT INTO Users (Name, Phone) VALUES (?,?)",
-                [name, phone],
+            await tx.executeSql("INSERT INTO Users (Name, bloodGroup, Phone) VALUES (?,?,?)",
+                [name, bloodGroup, phone],
                 (tx, results) => {
                     console.log('Successfully save');
                     onChangeName('')
                     onChangePhone('')
+                    onChangeGroup('')
                     getData()
                 },
                 error => { setLoading(false); console.log('Save error: ' + error.message) }
@@ -93,7 +95,7 @@ const DatabaseView = ({ navigation }) => {
     }
 
     const updateData = async (ID) => {
-        if (!nameUpdate || !phoneUpdate) {
+        if (!nameUpdate || !phoneUpdate || !bloodGroupUpdate) {
             alert('enter name and phone');
             return false;
         }
@@ -101,8 +103,8 @@ const DatabaseView = ({ navigation }) => {
         console.log('name: ' + nameUpdate + 'phone: ' + phoneUpdate);
         await db.transaction(async (tx) => {
 
-            await tx.executeSql("UPDATE Users SET Name = ? , Phone = ? WHERE ID = ?",
-                [nameUpdate, phoneUpdate, ID],
+            await tx.executeSql("UPDATE Users SET Name = ? , Phone = ? , bloodGroup = ? WHERE ID = ?",
+                [nameUpdate, phoneUpdate, bloodGroupUpdate, ID],
                 (tx, results) => {
                     alert('Successfully Update');
                     getData()
@@ -142,7 +144,7 @@ const DatabaseView = ({ navigation }) => {
 
                         for (var i = 0; i < len; i++) {
                             var item = results.rows.item(i);
-                            users.push({ ID: item.ID, Name: item.Name, Phone: item.Phone })
+                            users.push({ ID: item.ID, Name: item.Name, Phone: item.Phone, bloodGroup: item.bloodGroup })
                         }
 
 
@@ -175,36 +177,42 @@ const DatabaseView = ({ navigation }) => {
             ]
         );
 
-    const childView = (name, phone, ID) => {
+    const childView = (name, phone, bloodGroup, ID) => {
         return (
-            <View style={{ backgroundColor: 'gray', borderRadius: 8, padding: 10, margin: 5, flex: 100, flexDirection: 'row', justifyContent: "center" }}>
+            <View style={{ backgroundColor: 'white', elevation: 5, borderRadius: 8, padding: 10, marginTop: 6, marginBottom: 6, marginLeft: 12, marginRight: 12, flex: 100, flexDirection: 'row', justifyContent: "center" }}>
 
                 <View style={{ flex: 80, justifyContent: 'center', }}>
-                    <Text style={{ color: 'white', fontWeight: 'bold' }}>{name}</Text>
-                    <Text style={{ color: 'white', fontWeight: '500', marginTop: 4 }}>{phone}</Text>
+                    <Text style={{ color: 'gray', fontWeight: 'bold' }}>{name}</Text>
+                    <Text style={{ color: 'gray', fontWeight: '500', marginTop: 4 }}>{phone}</Text>
+                    <Text style={{ color: 'gray', fontWeight: '500', marginTop: 4 }}>{bloodGroup}</Text>
                 </View>
-                <Pressable
-                    style={[customStyle.button, customStyle.buttonCancel, { marginEnd: 8 }]}
-                    onPress={createTwoButtonAlert.bind(this, ID, name)}
-                >
-                    <Text style={customStyle.textStyle}>Delete</Text>
-                </Pressable>
-                <Pressable
-                    style={[customStyle.button, customStyle.buttonClose]}
-                    onPress={showModal.bind(this, ID, name, phone)}
-                >
-                    <Text style={customStyle.textStyle}>Update</Text>
-                </Pressable>
+                <View style={{ justifyContent: 'center', flexDirection: 'column' }}>
+                    <Pressable
+                        style={[customStyle.buttonItem, customStyle.buttonClose]}
+                        onPress={showModal.bind(this, ID, name, phone, bloodGroup)}
+                    >
+                        <Text style={customStyle.textStyle}>Update</Text>
+                    </Pressable>
+                    <Pressable
+                        style={[customStyle.buttonItem, { marginTop: 4, }, customStyle.buttonCancel, { marginEnd: 8 }]}
+                        onPress={createTwoButtonAlert.bind(this, ID, name)}
+                    >
+                        <Text style={customStyle.textStyle}>Delete</Text>
+                    </Pressable>
+
+                </View>
+
 
             </View>
         )
 
     }
 
-    const showModal = (ID, name, phone) => {
+    const showModal = (ID, name, phone, bloodGroup) => {
         setId(ID)
         onChangeNameUpdate(name)
         onChangePhoneUpdate(phone)
+        onChangeGroupUpdate(bloodGroup)
         setModalVisible(true)
     }
 
@@ -219,8 +227,8 @@ const DatabaseView = ({ navigation }) => {
 
     const listView = () => {
         return (
-            <FlatList contentContainerStyle={{ paddingBottom: 28 }}
-                key={item => item.ID} data={data} renderItem={({ item }) => { return childView(item.Name, item.Phone, item.ID) }} />
+            <FlatList contentContainerStyle={{ paddingBottom: 0 }}
+                keyExtractor={item => item.ID} data={data} renderItem={({ item }) => { return childView(item.Name, item.Phone, item.bloodGroup, item.ID) }} />
         )
     }
 
@@ -230,96 +238,125 @@ const DatabaseView = ({ navigation }) => {
         getData()
     }, []);
     return (
-        <SafeAreaView >
 
-            <View style={{ margin: 12 }}>
-                <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                        Alert.alert("Modal has been closed.");
-                        setModalVisible(!modalVisible);
-                    }}
-                >
-                    <View style={customStyle.centeredView}>
-                        <View style={customStyle.modalView}>
-                            <Text style={customStyle.modalText}>Update Data</Text>
-                            <TextInput
-                                style={{
-                                    width: '100%',
-                                    height: 40,
-                                    margin: 12,
-                                    borderColor: 'gray',
-                                    borderWidth: 1,
-                                    borderRadius: 8,
-                                    padding: 10,
-                                }}
-                                onChangeText={onChangePhoneUpdate}
-                                placeholder="Phone"
-                                returnKeyType='next'
-                                keyboardType="phone-pad"
-                                value={phoneUpdate}
-                            />
-                            <TextInput
-                                style={{
-                                    width: '100%',
-                                    height: 40,
-                                    margin: 12,
-                                    borderColor: 'gray',
-                                    borderWidth: 1,
-                                    borderRadius: 8,
-                                    padding: 10,
-                                }}
-                                onChangeText={onChangeNameUpdate}
-                                value={nameUpdate}
-                                placeholder="Name"
-                                keyboardType="default"
-                            />
-                            <View style={{ flexDirection: 'row' }}>
-                                <Pressable
-                                    style={[customStyle.button, customStyle.buttonCancel, { marginEnd: 8 }]}
-                                    onPress={() => setModalVisible(!modalVisible)}
-                                >
-                                    <Text style={customStyle.textStyle}>Cancel</Text>
-                                </Pressable>
-                                <Pressable
-                                    style={[customStyle.button, customStyle.buttonClose]}
-                                    onPress={() => onUpdateItem(id)}
-                                >
-                                    <Text style={customStyle.textStyle}>Update</Text>
-                                </Pressable>
-                            </View>
+
+        <View style={{ marginTop: 12, flex: 1 }}>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    Alert.alert("Modal has been closed.");
+                    setModalVisible(!modalVisible);
+                }} >
+                <View style={customStyle.centeredView}>
+                    <View style={customStyle.modalView}>
+                        <Text style={customStyle.modalText}>Update Data</Text>
+                        <TextInput
+                            style={{
+                                width: '100%',
+                                height: 40,
+                                margin: 12,
+                                borderColor: 'gray',
+                                borderWidth: 1,
+                                borderRadius: 8,
+                                padding: 10,
+                            }}
+                            onChangeText={onChangeNameUpdate}
+                            value={nameUpdate}
+                            placeholder="Name"
+                            keyboardType="default"
+                        />
+                        <TextInput
+                            style={{
+                                width: '100%',
+                                height: 40,
+                                margin: 12,
+                                borderColor: 'gray',
+                                borderWidth: 1,
+                                borderRadius: 8,
+                                padding: 10,
+                            }}
+                            onChangeText={onChangePhoneUpdate}
+                            placeholder="Phone"
+                            returnKeyType='next'
+                            keyboardType="phone-pad"
+                            value={phoneUpdate}
+                        />
+
+                        <TextInput
+                            style={{
+                                width: '100%',
+                                height: 40,
+                                margin: 12,
+                                borderColor: 'gray',
+                                borderWidth: 1,
+                                borderRadius: 8,
+                                padding: 10,
+                            }}
+                            onChangeText={onChangeGroupUpdate}
+                            placeholder="Blood Group"
+                            returnKeyType='done'
+                            keyboardType="default"
+                            value={bloodGroupUpdate}
+                        />
+
+                        <View style={{ flexDirection: 'row' }}>
+                            <Pressable
+                                style={[customStyle.button, customStyle.buttonCancel, { marginEnd: 8 }]}
+                                onPress={() => setModalVisible(!modalVisible)}
+                            >
+                                <Text style={customStyle.textStyle}>Cancel</Text>
+                            </Pressable>
+                            <Pressable
+                                style={[customStyle.button, customStyle.buttonClose]}
+                                onPress={() => onUpdateItem(id)}
+                            >
+                                <Text style={customStyle.textStyle}>Update</Text>
+                            </Pressable>
                         </View>
                     </View>
-                </Modal>
-                <TextInput
-                    style={customStyle.input}
-                    onChangeText={onChangePhone}
-                    placeholder="Phone"
-                    returnKeyType='next'
-                    keyboardType="phone-pad"
-                    value={phone}
-                />
-                <TextInput
-                    style={customStyle.input}
-                    onChangeText={onChangeName}
-                    value={name}
-                    placeholder="Name"
-                    keyboardType="default"
-                />
+                </View>
+            </Modal>
 
-                <TouchableOpacity style={customStyle.SubmitButtonStyle}
-                    activeOpacity={.5}
-                    onPress={() => saveData()}>
+            <TextInput
+                style={customStyle.input}
+                onChangeText={onChangeName}
+                value={name}
+                placeholder="Name"
+                keyboardType="default"
+            />
 
-                    {isLoading ? <ActivityIndicator color='white' /> : <Text style={customStyle.TextStyle}>Save</Text>}
+            <TextInput
+                style={customStyle.input}
+                onChangeText={onChangePhone}
+                placeholder="Phone"
+                returnKeyType='next'
+                keyboardType="phone-pad"
+                value={phone}
+            />
 
-                </TouchableOpacity>
+            <TextInput
+                style={customStyle.input}
+                onChangeText={onChangeGroup}
+                placeholder="Blood Group"
+                returnKeyType='done'
+                keyboardType="default"
+                value={bloodGroup}
+            />
 
-                {listView()}
-            </View>
-        </SafeAreaView>
+            <TouchableOpacity style={customStyle.SubmitButtonStyle}
+                activeOpacity={.5}
+                onPress={() => saveData()}>
+
+                {isLoading ? <ActivityIndicator color='white' /> : <Text style={customStyle.TextStyle}>Save</Text>}
+
+            </TouchableOpacity>
+
+            {listView()}
+
+        </View>
+
     );
 };
 
