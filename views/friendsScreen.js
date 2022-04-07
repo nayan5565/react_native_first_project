@@ -24,7 +24,7 @@ class FriendsScreen extends React.Component {
                 <Button
                     title="Back to home"
                     onPress={() =>
-                        this.props.navigation.navigate('HomeNew')
+                        this.props.navigation.navigate('Redux')
                     }
                 />
             </View>

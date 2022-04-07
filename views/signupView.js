@@ -135,7 +135,7 @@ const SignupView = ({ navigation }) => {
                 >
                     <View style={customStyle.centeredView}>
                         <View style={customStyle.modalView}>
-                            <Text style={customStyle.modalText}>Update Data</Text>
+                            <Text style={customStyle.modalText}>Confirm Signup</Text>
                             <TextInput
                                 style={{
                                     width: '100%',

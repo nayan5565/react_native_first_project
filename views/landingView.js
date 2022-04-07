@@ -26,13 +26,10 @@ class LandingView extends Component {
                             onPress={() => this.props.navigation.navigate('Home')}
                         />
 
+
                         <Button
-                            title="Friends"
-                            onPress={() => this.props.navigation.navigate('Friends')}
-                        />
-                        <Button
-                            title="Home"
-                            onPress={() => this.props.navigation.navigate('HomeNew')}
+                            title="Redux"
+                            onPress={() => this.props.navigation.navigate('Redux')}
                         />
 
                         {/* <ComponentTwo name="Nayan" city='Dhaka' />

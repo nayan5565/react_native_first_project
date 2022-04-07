@@ -43,7 +43,7 @@ class App extends Component {
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Splash">
             <Stack.Screen name="Splash" component={SplashView} options={{ headerShown: false }} />
-            <Stack.Screen name="HomeNew" component={homeScreenNew} />
+            <Stack.Screen name="Redux" component={homeScreenNew} />
             <Stack.Screen name="Signup" component={SignupView} options={{ headerShown: false }} />
             <Stack.Screen name="Friends" component={friendsScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />

@@ -118,7 +118,11 @@ const LoginView = ({ navigation }) => {
     }
 
     useEffect(() => {
+        let isMounted = true;               // note mutable flag
+        if (isMounted) {
 
+        }
+        return () => { isMounted = false }; // cleanup toggles value, if unmounted
     }, []);
     return (
         <View style={customStyle.container}>

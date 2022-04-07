@@ -231,16 +231,24 @@ const DatabaseView = ({ navigation }) => {
                 keyExtractor={item => item.ID} data={data} renderItem={({ item }) => { return childView(item.Name, item.Phone, item.bloodGroup, item.ID) }} />
         )
     }
-
     useEffect(() => {
+        let isMounted = true;
+        if (isMounted) {
+            createTable()
+            getData()
+        }             // note mutable flag
 
-        createTable()
-        getData()
+        return () => { isMounted = false }; // cleanup toggles value, if unmounted
     }, []);
+    // useEffect(() => {
+
+    //     createTable()
+    //     getData()
+    // }, []);
     return (
 
 
-        <View style={{ marginTop: 12 }}>
+        <View style={{ marginTop: 12, flex: 1 }}>
             <Modal
                 animationType="slide"
                 transparent={true}
