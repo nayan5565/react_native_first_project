@@ -11,10 +11,10 @@ const SplashView = ({ navigation }) => {
                 var login = JSON.parse(value)
                 console.log('Sp: ' + login)
                 if (login) {
-                    navigation.navigate('Landing', { data: value });
-                } else navigation.navigate('Login');
+                    navigation.replace('Landing', { data: value });
+                } else navigation.replace('Login');
 
-            } else navigation.navigate('Login');
+            } else navigation.replace('Login');
         } catch (e) {
             console.log('Sp: ' + JSON.stringify(e))
             // navigation.navigate('Login');

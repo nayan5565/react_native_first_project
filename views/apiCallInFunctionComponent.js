@@ -18,6 +18,20 @@ export default ApiCallInFunctionComponent = () => {
         }
     }
 
+    const getMovies2 = async () => {
+
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
+        fetch("https://reactnative.dev/movies.json", requestOptions)
+            .then(response => response.json())
+            .then(result => setData(result.movies))
+            .catch(error => console.log('error', error))
+            .finally(() => setLoading(false));
+    }
+
     useEffect(() => {
         getMovies();
     }, []);

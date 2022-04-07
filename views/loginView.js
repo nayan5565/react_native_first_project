@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, StyleSheet, FlatList, View, Text, TextInput, ActivityIndicator, Button, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TextInput, ActivityIndicator, TouchableOpacity } from "react-native";
 import customStyle from '../customStyle';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -7,11 +7,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginView = ({ navigation }) => {
 
-    const [email, onChangeEmail] = useState("");
+    const [phone, onChangePhone] = useState("");
     const [password, onChangePassword] = useState(null);
     const [isLoading, setLoading] = useState(false);
-    const [data, setData] = useState([]);
-    const [userData, setUserData] = useState({});
 
     const onLogin = async (email, password) => {
         if (email == null || password == null) {
@@ -70,7 +68,7 @@ const LoginView = ({ navigation }) => {
 
         var raw = JSON.stringify({
             "medium": "phone",
-            "emailOrPhone": "+88" + email,
+            "emailOrPhone": "+88" + phone,
             "password": password
         });
 
@@ -81,65 +79,57 @@ const LoginView = ({ navigation }) => {
             redirect: 'follow'
         };
 
-        fetch("https://ctapi.shadhinlab.xyz/dev/auth/authentication/signin", requestOptions)
-            .then(response => response.json())
-            .then(result => changeScreen(result.data))
-            // .then(result => changeScreen(result.data))
-            .catch(error => console.log('error', error)).finally(() => setLoading(false));
+        // fetch("https://ctapi.shadhinlab.xyz/dev/auth/authentication/signin", requestOptions)
+        //     .then(response => response.json())
+        //     .then(result => console.log('Login res: ' + JSON.stringify(response)))
+        // .then(result => changeScreen(result.data))
+        //     .catch(error => console.log('error', error)).finally(() => setLoading(false));
+        try {
+            const response = await fetch("https://kjggeg8yjl.execute-api.us-west-2.amazonaws.com/qa/auth/authentication/signin", requestOptions);
+            const result = await response.json();
+            if (response.status == 200) {
+                // console.log('Login res: ' + JSON.stringify(result.data));
+                changeScreen(result.data)
+            } else {
+                alert(result.message)
+            }
+
+        } catch (error) {
+            console.log('Login err: ' + JSON.stringify(error));
+            alert(error)
+
+        } finally {
+            setLoading(false);
+        }
+
     }
     const changeScreen = (loginData) => {
         // setUserData(loginData)
         console.log("userData: " + JSON.stringify(loginData))
         storeData(true)
-        navigation.navigate('Details', {
+        navigation.replace('Database', {
             users: loginData,
         });
     }
 
-    const getMovies2 = async () => {
-        try {
-            const response = await fetch('https://reactnative.dev/movies.json');
-            console.log('Response: ' + JSON.stringify(response))
-            const json = await response.json();
-
-
-            setData(json.movies);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
-    }
-    const getMovies = async () => {
-
-        var requestOptions = {
-            method: 'GET',
-            redirect: 'follow'
-        };
-
-        fetch("https://reactnative.dev/movies.json", requestOptions)
-            .then(response => response.json())
-            .then(result => setData(result.movies))
-            .catch(error => console.log('error', error))
-            .finally(() => setLoading(false));
+    const goSignupView = () => {
+        storeData(true)
+        navigation.navigate('Signup');
     }
 
     useEffect(() => {
-        if (userData.myEmail) {
-            console.log(userData.myEmail)
-        }
-    }, [userData]);
+
+    }, []);
     return (
-
-
         <View style={customStyle.container}>
+
             <TextInput
                 style={customStyle.input}
-                onChangeText={onChangeEmail}
+                onChangeText={onChangePhone}
                 placeholder="Phone"
                 returnKeyType='next'
                 keyboardType="phone-pad"
-                value={email}
+                value={phone}
             />
             <TextInput
                 style={customStyle.input}
@@ -149,13 +139,15 @@ const LoginView = ({ navigation }) => {
                 placeholder="Password"
             />
 
-            <TouchableOpacity style={customStyle.SubmitButtonStyle}
+            <TouchableOpacity style={isLoading ? customStyle.DisableButtonStyle : customStyle.SubmitButtonStyle}
                 activeOpacity={.5}
-                onPress={() => onLogin(email, password)}>
+                onPress={() => isLoading ? null : onLogin(phone, password)}>
 
                 {isLoading ? <ActivityIndicator color='white' /> : <Text style={customStyle.TextStyle}>Login</Text>}
 
             </TouchableOpacity>
+
+            <Text onPress={() => goSignupView()} style={{ color: 'black', textAlign: 'center', fontSize: 16 }}>Create New Account</Text>
         </View>
 
 

@@ -44,6 +44,16 @@ module.exports = {
         borderWidth: 1,
         borderColor: '#fff'
     },
+
+    DisableButtonStyle: {
+        height: 43,
+        margin: 10,
+        justifyContent: 'center',
+        backgroundColor: 'gray',
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#fff'
+    },
     TextStyle: {
         color: '#fff',
         textAlign: 'center',
