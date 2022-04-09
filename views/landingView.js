@@ -31,7 +31,10 @@ class LandingView extends Component {
                             title="Redux"
                             onPress={() => this.props.navigation.navigate('Redux')}
                         />
-
+                        <Button
+                            title="Redux Hook"
+                            onPress={() => this.props.navigation.navigate('ReduxHook')}
+                        />
                         {/* <ComponentTwo name="Nayan" city='Dhaka' />
                         <ComponentThree name="Nurul" city='Narail' /> */}
                         <Button

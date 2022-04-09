@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { increaseCounter, decreaseCounter } from '../actions/counterAction';
+import { increaseCounter, decreaseCounter } from '../redux/actions/counterAction';
 
 class HomeScreen extends Component {
     render() {

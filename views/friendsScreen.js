@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { addFriend } from '../actions/friendsActions';
+import { addFriend } from '../redux/actions/friendsActions';
 
 
 class FriendsScreen extends React.Component {

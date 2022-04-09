@@ -1,22 +1,35 @@
-import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, Pressable, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { decreaseCounter, increaseCounter } from '../redux/actions/counterAction';
+import { getCities } from '../redux/actions/apiActions';
 
 const ChangeData = () => {
-    const [timesPressed, setTimesPressed] = useState(0);
+    // const [timesPressed, setTimesPressed] = useState(0);
+    const dispatch = useDispatch()
+    const increaseCount = () => dispatch(increaseCounter())
+    const decreaseCount = () => dispatch(decreaseCounter())
+    const getData = () => dispatch(getCities())
+    const { counter } = useSelector((state) => state.counter)
+    const { cities, status } = useSelector((state) => state.apis)
 
+    useEffect(() => {
+        getData()
+    }, []);
     let textLog = '';
-    if (timesPressed > 1) {
-        textLog = timesPressed + 'x onPress';
-    } else if (timesPressed > 0) {
+    if (counter > 1) {
+        textLog = counter + 'x onPress';
+    } else if (counter > 0) {
         textLog = 'onPress';
     }
 
     return (
         <View style={styles.container}>
             <Pressable
-                onPress={() => {
-                    setTimesPressed((current) => current + 1);
-                }}
+                // onPress={() => {
+                // setTimesPressed((current) => current + 1);
+                // }}
+                onPress={() => increaseCount()}
                 style={({ pressed }) => [
                     {
                         backgroundColor: pressed
@@ -27,13 +40,40 @@ const ChangeData = () => {
                 ]}>
                 {({ pressed }) => (
                     <Text style={styles.text}>
-                        {pressed ? 'Pressed!' : 'Press Me'}
+                        {pressed ? 'Pressed increase' : 'Press Me increase'}
+                    </Text>
+                )}
+            </Pressable>
+            <Pressable
+                // onPress={() => {
+                // setTimesPressed((current) => current + 1);
+                // }}
+                onPress={() => decreaseCount()}
+                style={({ pressed }) => [
+                    {
+                        backgroundColor: pressed
+                            ? 'rgb(210, 230, 255)'
+                            : 'white'
+                    },
+                    styles.wrapperCustom
+                ]}>
+                {({ pressed }) => (
+                    <Text style={styles.text}>
+                        {pressed ? 'Pressed decrease' : 'Press Me decrease'}
                     </Text>
                 )}
             </Pressable>
             <View style={styles.logBox}>
                 <Text testID="pressable_press_console">{textLog}</Text>
+                <Text >Status: {status}</Text>
             </View>
+            {status == '' ? <ActivityIndicator color='red' /> : status !== 'success' ? <Text >Error</Text> : (<FlatList
+                data={cities}
+                keyExtractor={({ id }, index) => id}
+                renderItem={({ item }) => (
+                    <Text>{item.title}, {item.releaseYear}</Text>
+                )}
+            />)}
         </View>
     );
 };

@@ -13,12 +13,13 @@ import DatabaseView from './views/databaseView';
 import SplashView from './views/splashView';
 import UtilsView from './views/utilsView';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
-import friendsReducer from './reducer/friendsReducer';
+import thunk from "redux-thunk"
+import { createStore, applyMiddleware } from 'redux';
 import homeScreenNew from './views/homeScreenNew';
 import friendsScreen from './views/friendsScreen';
-import allReducers from './reducer/allReducer';
+import allReducers from './redux/reducer/allReducer';
 import SignupView from './views/signupView';
+import ChangeData from './views/changeData';
 // import SQLite from 'react-native-sqlite-storage';
 
 // global.db = SQLite.openDatabase(
@@ -33,7 +34,7 @@ import SignupView from './views/signupView';
 //     }
 // );
 
-const store = createStore(allReducers);
+const store = createStore(allReducers, applyMiddleware(thunk));
 const Stack = createNativeStackNavigator();
 class App extends Component {
 
@@ -49,6 +50,7 @@ class App extends Component {
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Details" component={DetailsScreen} />
             <Stack.Screen name="Database" component={DatabaseView} />
+            <Stack.Screen name="ReduxHook" component={ChangeData} />
             <Stack.Screen name="List" component={ListItemView} />
             <Stack.Screen name="Landing" component={LandingView} />
             <Stack.Screen name="Api" component={ApiCallView} />
