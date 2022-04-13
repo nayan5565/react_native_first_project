@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LandingView from './views/landingView';
-import HomeScreen from './views/homeScreen';
-import DetailsScreen from './views/detailsScreen';
-import ListItemView from './views/listItemView';
-import ApiCallView from './views/apiCallView';
-import ApiCallInFunctionComponent from './views/apiCallInFunctionComponent';
-import LoginView from './views/loginView';
-import DatabaseView from './views/databaseView';
-import SplashView from './views/splashView';
-import UtilsView from './views/utilsView';
+import LandingView from './src/views/landingView';
+import HomeScreen from './src/views/homeScreen';
+import DetailsScreen from './src/views/detailsScreen';
+import ListItemView from './src/views/listItemView';
+import ApiCallView from './src/views/apiCallView';
+import ApiCallInFunctionComponent from './src/views/apiCallInFunctionComponent';
+import LoginView from './src/views/loginView';
+import DatabaseView from './src/views/databaseView';
+import SplashView from './src/views/splashView';
+import UtilsView from './src/views/utilsView';
 import { Provider } from 'react-redux';
 import thunk from "redux-thunk"
 import { createStore, applyMiddleware } from 'redux';
-import homeScreenNew from './views/homeScreenNew';
-import friendsScreen from './views/friendsScreen';
-import allReducers from './redux/reducer/allReducer';
-import SignupView from './views/signupView';
-import ChangeData from './views/changeData';
+import homeScreenNew from './src/views/homeScreenNew';
+import friendsScreen from './src/views/friendsScreen';
+import allReducers from './src/redux/reducer/allReducer';
+import SignupView from './src/views/signupView';
+import ChangeData from './src/views/changeData';
+import MapScreen from './src/views/MapScreen';
+import ChooseLocation from './src/views/ChooseLocation';
 // import SQLite from 'react-native-sqlite-storage';
 
 // global.db = SQLite.openDatabase(
@@ -48,6 +49,8 @@ class App extends Component {
             <Stack.Screen name="Signup" component={SignupView} options={{ headerShown: false }} />
             <Stack.Screen name="Friends" component={friendsScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="ChooseLocation" component={ChooseLocation} />
+            <Stack.Screen name="Map" component={MapScreen} options={{ headerShown: false }} />
             <Stack.Screen name="Details" component={DetailsScreen} />
             <Stack.Screen name="Database" component={DatabaseView} />
             <Stack.Screen name="ReduxHook" component={ChangeData} />

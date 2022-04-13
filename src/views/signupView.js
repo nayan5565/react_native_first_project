@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, Modal, Pressable, ScrollView, ActivityIndicator, TouchableOpacity, Text } from 'react-native';
-import customStyle from '../customStyle';
+import customStyle from '../../customStyle'
 
 const SignupView = ({ navigation }) => {
     const [name, onChangeName] = useState("");

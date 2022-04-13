@@ -1,4 +1,4 @@
-import { GET_DATA } from "../../types";
+import { GET_DATA } from "../../constants/types";
 
 // export const getCities = () => (
 //     {

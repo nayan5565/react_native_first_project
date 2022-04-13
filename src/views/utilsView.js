@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Modal, Image, View, SafeAreaView, Text, Alert, Pressable, Share, TouchableOpacity } from 'react-native';
 // import CircularProgress from 'react-native-circular-progress-indicator';
-import customStyle from '../customStyle';
+import customStyle from '../../customStyle'
+import imagePath from '../constants/imagePath';
 
 const Separator = () => (
     <View style={customStyle.separator} />
@@ -137,7 +138,7 @@ const UtilsView = () => {
             </View>
             <Separator />
             <View>
-                <Image style={{ width: '100%', height: '30%' }} source={require('../images/banner.png')} />
+                <Image style={{ width: '100%', height: '30%' }} source={imagePath.imgBanner} />
             </View>
             <View>
                 <Text style={customStyle.title}>

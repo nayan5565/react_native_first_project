@@ -1,5 +1,5 @@
 
-import { ADD_FRIEND } from '../../types';
+import { ADD_FRIEND } from '../../constants/types';
 
 const INITIAL_STATE = {
     current: [],

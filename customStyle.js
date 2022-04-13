@@ -12,11 +12,12 @@ module.exports = {
         backgroundColor: 'orange',
     },
     input: {
-        height: 43,
-        margin: 12,
-        borderWidth: 1,
+        height: 48,
+        // margin: 12,
+        // borderWidth: 1,
         borderRadius: 8,
         padding: 10,
+        backgroundColor: '#F3F3F3'
     },
     title: {
         textAlign: 'center',
@@ -117,4 +118,21 @@ module.exports = {
         justifyContent: 'center',
         textAlign: "center"
     },
+    bottomCard: {
+        backgroundColor: "white",
+        width: '100%',
+        padding: 30,
+        borderTopEndRadius: 24,
+        borderTopStartRadius: 24,
+    },
+
+    inputStyle: {
+        backgroundColor: "white",
+        borderRadius: 4,
+        borderWidth: 1,
+        alignItems: 'center',
+        height: 48,
+        justifyContent: 'center',
+        marginTop: 16
+    }
 }

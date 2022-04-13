@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, Button, Image, ScrollView, SafeAreaView } from 'react-native';
-import ComponentImage from '../components/componentImage';
-import ComponentShare from '../components/componentShare';
-import ComponentThree from '../components/componentThree';
-import ComponentTwo from '../components/componentTwo';
-import customStyle from '../customStyle';
+import { View, Button, ScrollView, SafeAreaView } from 'react-native';
+import customStyle from '../../customStyle'
 
 class LandingView extends Component {
 
@@ -26,7 +22,10 @@ class LandingView extends Component {
                             onPress={() => this.props.navigation.navigate('Home')}
                         />
 
-
+                        <Button
+                            title="Map"
+                            onPress={() => this.props.navigation.navigate('Map')}
+                        />
                         <Button
                             title="Redux"
                             onPress={() => this.props.navigation.navigate('Redux')}

@@ -1,4 +1,4 @@
-import { DECREASE_COUNTER, GET_DATA, INCREASE_COUNTER } from "../../types";
+import { DECREASE_COUNTER, GET_DATA, INCREASE_COUNTER } from "../../constants/types";
 
 
 export const increaseCounter = (num) => (

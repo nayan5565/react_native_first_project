@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, Alert, FlatList, Modal, Pressable, View, Text, Button, TextInput, ActivityIndicator, TouchableOpacity } from "react-native";
-import customStyle from '../customStyle';
+import { Alert, FlatList, Modal, Pressable, View, Text, Button, TextInput, ActivityIndicator, TouchableOpacity } from "react-native";
+import customStyle from '../../customStyle'
 import { openDatabase } from 'react-native-sqlite-storage';
 
 const db = openDatabase({
