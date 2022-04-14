@@ -5,6 +5,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import customStyle from '../../customStyle';
 import AddressPickup from '../components/AddressPickup';
 import CustomBtn from '../components/CustomBtn';
+import { showError } from '../helper/helperFunction';
 
 const ChooseLocation = (props) => {
     const navigation = useNavigation()
@@ -13,12 +14,28 @@ const ChooseLocation = (props) => {
         destinationCords: {}
     })
     const { pickupCords, destinationCords } = state
+    const checkValid = () => {
+        // if (Object.keys(pickupCords).length === 0) {
+        //     showError('Plase pick your pickup location!!')
+        //     return false
+        // }
+
+        if (Object.keys(destinationCords).length === 0) {
+            showError('Plase pick your dest location!!')
+            return false
+        }
+        return true
+    }
     const onDone = () => {
-        props.route.params.getLocation({
-            pickupCords,
-            destinationCords
-        })
-        navigation.goBack()
+        const isValid = checkValid()
+        if (isValid) {
+            props.route.params.getLocation({
+                pickupCords,
+                destinationCords
+            })
+            navigation.goBack()
+        }
+
     }
     const fetchAddressCords = (lat, lng) => {
 
@@ -40,7 +57,7 @@ const ChooseLocation = (props) => {
         })
     }
 
-    console.log('pickup==>', props)
+    // console.log('pickup==>', props)
     // console.log('destination==>', destinationCords)
     return (
         <View style={{ flex: 1 }}>

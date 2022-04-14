@@ -21,6 +21,7 @@ import SignupView from './src/views/signupView';
 import ChangeData from './src/views/changeData';
 import MapScreen from './src/views/MapScreen';
 import ChooseLocation from './src/views/ChooseLocation';
+import FlashMessage from 'react-native-flash-message';
 // import SQLite from 'react-native-sqlite-storage';
 
 // global.db = SQLite.openDatabase(
@@ -61,6 +62,7 @@ class App extends Component {
             <Stack.Screen name="Login" component={LoginView} options={{ headerShown: false }} />
             <Stack.Screen name="ApiFunc" component={ApiCallInFunctionComponent} />
           </Stack.Navigator>
+          <FlashMessage position='top' />
         </NavigationContainer>
       </Provider>
 
