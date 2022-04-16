@@ -248,7 +248,7 @@ const DatabaseView = ({ navigation }) => {
     return (
 
 
-        <View style={{ marginTop: 12, flex: 1 }}>
+        <View style={{ marginTop: 12, flex: 1, backgroundColor: 'white' }}>
             <Modal
                 animationType="slide"
                 transparent={true}
@@ -328,7 +328,7 @@ const DatabaseView = ({ navigation }) => {
             </Modal>
 
             <TextInput
-                style={customStyle.input}
+                style={[customStyle.input, { marginTop: 12, marginHorizontal: 12 }]}
                 onChangeText={onChangeName}
                 value={name}
                 placeholder="Name"
@@ -336,7 +336,7 @@ const DatabaseView = ({ navigation }) => {
             />
 
             <TextInput
-                style={customStyle.input}
+                style={[customStyle.input, { marginTop: 12, marginHorizontal: 12 }]}
                 onChangeText={onChangePhone}
                 placeholder="Phone"
                 returnKeyType='next'
@@ -345,7 +345,7 @@ const DatabaseView = ({ navigation }) => {
             />
 
             <TextInput
-                style={customStyle.input}
+                style={[customStyle.input, { marginTop: 12, marginHorizontal: 12 }]}
                 onChangeText={onChangeGroup}
                 placeholder="Blood Group"
                 returnKeyType='done'

@@ -24,6 +24,7 @@ import ChooseLocation from './src/views/ChooseLocation';
 import FlashMessage from 'react-native-flash-message';
 import 'react-native-gesture-handler';
 import MyDrawer from './src/components/MyDrawer';
+import MyBottomTab from './src/components/MyBottomTab';
 // import SQLite from 'react-native-sqlite-storage';
 
 // global.db = SQLite.openDatabase(
@@ -49,7 +50,8 @@ class App extends Component {
           <Stack.Navigator initialRouteName="Splash">
             <Stack.Screen name="Splash" component={SplashView} options={{ headerShown: false }} />
             <Stack.Screen name="Redux" component={homeScreenNew} />
-            <Stack.Screen name="Drawer" component={MyDrawer} />
+            <Stack.Screen name="Drawer" component={MyDrawer} options={{ headerShown: false }} />
+            <Stack.Screen name="BottomTab" component={MyBottomTab} options={{ headerShown: false }} />
             <Stack.Screen name="Signup" component={SignupView} options={{ headerShown: false }} />
             <Stack.Screen name="Friends" component={friendsScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />

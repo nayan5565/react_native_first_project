@@ -40,7 +40,7 @@ module.exports = {
         height: 43,
         margin: 10,
         justifyContent: 'center',
-        backgroundColor: '#00BCD4',
+        backgroundColor: 'teal',
         borderRadius: 10,
         borderWidth: 1,
         borderColor: '#fff'
