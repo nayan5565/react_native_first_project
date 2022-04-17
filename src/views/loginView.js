@@ -11,7 +11,7 @@ import * as Animatable from 'react-native-animatable';
 const LoginView = ({ navigation }) => {
 
     const [phone, onChangePhone] = useState("");
-    const [password, onChangePassword] = useState(null);
+    const [password, onChangePassword] = useState('');
     const [isLoading, setLoading] = useState(false);
     const [isSecurity, setSecurity] = useState(true)
     const toggleSecurity = () => {
@@ -150,7 +150,7 @@ const LoginView = ({ navigation }) => {
                         keyboardType="phone-pad"
                         value={phone}
                     />
-                    {phone.length > 0 ? <Animatable.View animation='bounceInRight'>
+                    {phone.length == 11 ? <Animatable.View animation='bounceInRight'>
                         <Feather name="check-circle" color='green' size={20} />
                     </Animatable.View> : null}
                 </View>
@@ -170,6 +170,8 @@ const LoginView = ({ navigation }) => {
                     </TouchableOpacity>
 
                 </View>
+
+                {password.length >= 8 ? null : <Animatable.Text animation='bounceInLeft' style={{ color: 'red', fontSize: 10 }}>Password must be 8 character</Animatable.Text>}
 
                 <Animatable.View animation='bounceInLeft' delay={600}>
                     <TouchableOpacity style={isLoading ? customStyle.DisableButtonStyle : customStyle.SubmitButtonStyle}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LandingView from './src/views/landingView';
 import HomeScreen from './src/views/homeScreen';
@@ -25,6 +25,9 @@ import FlashMessage from 'react-native-flash-message';
 import 'react-native-gesture-handler';
 import MyDrawer from './src/components/MyDrawer';
 import MyBottomTab from './src/components/MyBottomTab';
+import CustomBottomTab from './src/components/CustomBottomTab';
+import MyTab from './src/components/MyTab';
+import OnBoarding from './src/components/OnBoarding';
 // import SQLite from 'react-native-sqlite-storage';
 
 // global.db = SQLite.openDatabase(
@@ -46,13 +49,16 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <NavigationContainer>
+        <NavigationContainer >
           <Stack.Navigator initialRouteName="Splash">
             <Stack.Screen name="Splash" component={SplashView} options={{ headerShown: false }} />
             <Stack.Screen name="Redux" component={homeScreenNew} />
             <Stack.Screen name="Drawer" component={MyDrawer} options={{ headerShown: false }} />
             <Stack.Screen name="BottomTab" component={MyBottomTab} options={{ headerShown: false }} />
+            <Stack.Screen name="CustomBottomTab" component={CustomBottomTab} options={{ headerShown: false }} />
+            <Stack.Screen name="TabBar" component={MyTab} options={{ headerShown: false }} />
             <Stack.Screen name="Signup" component={SignupView} options={{ headerShown: false }} />
+            <Stack.Screen name="OnBoard" component={OnBoarding} />
             <Stack.Screen name="Friends" component={friendsScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="ChooseLocation" component={ChooseLocation} />

@@ -21,7 +21,10 @@ const SplashView = ({ navigation }) => {
         }
     }
     useEffect(() => {
-        getData()
+        setTimeout(() => {
+            getData()
+        }, 3000);
+
     }, []);
     return (
         <View style={customStyle.splashContainer}>

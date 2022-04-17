@@ -30,6 +30,18 @@ class LandingView extends Component {
                             onPress={() => this.props.navigation.navigate('BottomTab')}
                         />
                         <Button
+                            title="Tab Bar"
+                            onPress={() => this.props.navigation.navigate('TabBar')}
+                        />
+                        <Button
+                            title="Custom Bottom Tab"
+                            onPress={() => this.props.navigation.navigate('CustomBottomTab')}
+                        />
+                        <Button
+                            title="On Boarding"
+                            onPress={() => this.props.navigation.navigate('OnBoard')}
+                        />
+                        <Button
                             title="Map"
                             onPress={() => this.props.navigation.navigate('Map')}
                         />
