@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { FlatList, Image, StyleSheet, Animated, TouchableOpacity, Text, useWindowDimensions, View } from 'react-native';
+import { FlatList, Image, StyleSheet, Animated, Text, useWindowDimensions, View } from 'react-native';
 import slides from '../constants/slides';
-import Svg, { Circle, G, } from 'react-native-svg';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import NextButton from './NextButton';
+
 
 const OnBoarding = () => {
     const [currentIndex, setCurrenIndex] = useState(0)
@@ -14,6 +14,15 @@ const OnBoarding = () => {
     }).current
     const viewConfigRef = useRef({ viewAreaCoveragePercentThreshold: 50 }).current
     const slidesRef = useRef(null)
+
+    const scrollTo = () => {
+        if (currentIndex < slides.length - 1) {
+            slidesRef.current.scrollToIndex({ index: currentIndex + 1 })
+        } else {
+            console.log('last item')
+        }
+    }
+
 
     const ItemView = ({ item }) => {
         return (<View style={[styles.container, { width: width }]}>
@@ -43,41 +52,8 @@ const OnBoarding = () => {
             })}
         </View>)
     }
-    const size = 128
-    const strokeWidth = 2
-    const center = size / 2
-    const radius = size / 2 - strokeWidth / 2
-    const circumference = 2 * Math.PI * radius
-    const NextButton = () => {
-        return (
-            <View style={styles.container}>
-                <Svg width={size} height={size}>
-                    <Circle
-                        cx={center}
-                        cy={center}
-                        r={radius}
-                        stroke="#E6E7E8"
-                        strokeWidth={strokeWidth}
-                    />
-                    <Circle
-                        cx={center}
-                        cy={center}
-                        r={radius}
-                        stroke="#F4338F"
-                        strokeWidth={strokeWidth}
-                        strokeDasharray={circumference}
-                        strokeDashoffset={circumference - (circumference * 25) / 100}
-                    />
-                </Svg>
-                <TouchableOpacity style={styles.button} activeOpacity={0.6} onPress={() => { }}>
-
-                    <Ionicons name='arrow-forward' size={40} color='white' />
 
 
-                </TouchableOpacity>
-            </View>
-        )
-    }
 
     return (
         <View style={styles.container}>
@@ -101,7 +77,7 @@ const OnBoarding = () => {
                 />
             </View>
             <Paginator data={slides} />
-            <NextButton />
+            <NextButton scrollTo={scrollTo} percentage={(currentIndex + 1) * (100 / slides.length)} />
         </View>
     );
 }
