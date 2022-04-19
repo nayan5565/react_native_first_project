@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FlatList, Image, StyleSheet, Animated, Text, useWindowDimensions, View } from 'react-native';
 import slides from '../constants/slides';
 import NextButton from './NextButton';
@@ -15,11 +15,22 @@ const OnBoarding = () => {
     const viewConfigRef = useRef({ viewAreaCoveragePercentThreshold: 50 }).current
     const slidesRef = useRef(null)
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            scrollTo();
+        }, 4000)
+        return () => clearInterval(interval)
+    });
+
     const scrollTo = () => {
         if (currentIndex < slides.length - 1) {
-            slidesRef.current.scrollToIndex({ index: currentIndex + 1 })
+            slidesRef.current.scrollToIndex({
+                animated: true,
+                index: currentIndex + 1
+            })
         } else {
-            console.log('last item')
+            setCurrenIndex(-1)
+            // console.log('last item')
         }
     }
 
@@ -103,7 +114,7 @@ const styles = StyleSheet.create({
     },
     desc: {
         fontWeight: '800',
-        fontSize: 28,
+        fontSize: 12,
         paddingHorizontal: 64,
         color: '#62656b',
         textAlign: 'center'

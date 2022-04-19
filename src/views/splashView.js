@@ -23,7 +23,7 @@ const SplashView = ({ navigation }) => {
     useEffect(() => {
         setTimeout(() => {
             getData()
-        }, 3000);
+        }, 1000);
 
     }, []);
     return (

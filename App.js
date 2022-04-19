@@ -28,6 +28,7 @@ import MyBottomTab from './src/components/MyBottomTab';
 import CustomBottomTab from './src/components/CustomBottomTab';
 import MyTab from './src/components/MyTab';
 import OnBoarding from './src/components/OnBoarding';
+import MyBottomSheet from './src/components/MyBottomSheet';
 // import SQLite from 'react-native-sqlite-storage';
 
 // global.db = SQLite.openDatabase(
@@ -59,6 +60,7 @@ class App extends Component {
             <Stack.Screen name="TabBar" component={MyTab} options={{ headerShown: false }} />
             <Stack.Screen name="Signup" component={SignupView} options={{ headerShown: false }} />
             <Stack.Screen name="OnBoard" component={OnBoarding} />
+            <Stack.Screen name="BottomSheet" component={MyBottomSheet} />
             <Stack.Screen name="Friends" component={friendsScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="ChooseLocation" component={ChooseLocation} />

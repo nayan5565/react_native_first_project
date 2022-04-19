@@ -30,6 +30,10 @@ class LandingView extends Component {
                             onPress={() => this.props.navigation.navigate('BottomTab')}
                         />
                         <Button
+                            title="Bottom Sheet and pick image"
+                            onPress={() => this.props.navigation.navigate('BottomSheet')}
+                        />
+                        <Button
                             title="Tab Bar"
                             onPress={() => this.props.navigation.navigate('TabBar')}
                         />
