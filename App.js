@@ -29,6 +29,8 @@ import CustomBottomTab from './src/components/CustomBottomTab';
 import MyTab from './src/components/MyTab';
 import OnBoarding from './src/components/OnBoarding';
 import MyBottomSheet from './src/components/MyBottomSheet';
+import BarCodeScannerScreen from './src/views/BarCodeScannerScreen';
+import PushNotificationScreen from './src/views/PushNotificationScreen';
 // import SQLite from 'react-native-sqlite-storage';
 
 // global.db = SQLite.openDatabase(
@@ -54,6 +56,7 @@ class App extends Component {
           <Stack.Navigator initialRouteName="Splash">
             <Stack.Screen name="Splash" component={SplashView} options={{ headerShown: false }} />
             <Stack.Screen name="Redux" component={homeScreenNew} />
+            <Stack.Screen name="PushNotification" component={PushNotificationScreen} />
             <Stack.Screen name="Drawer" component={MyDrawer} options={{ headerShown: false }} />
             <Stack.Screen name="BottomTab" component={MyBottomTab} options={{ headerShown: false }} />
             <Stack.Screen name="CustomBottomTab" component={CustomBottomTab} options={{ headerShown: false }} />

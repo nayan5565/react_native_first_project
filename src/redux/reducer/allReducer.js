@@ -5,6 +5,7 @@ import friendsReducer from './friendsReducer'
 const allReducers = combineReducers({
     counter: counterReducer,
     friends: friendsReducer,
-    apis: apiReducer
+    apis: apiReducer,
+
 })
 export default allReducers

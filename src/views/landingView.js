@@ -10,8 +10,8 @@ class LandingView extends Component {
     }
     render() {
         return (
-            <SafeAreaView style={customStyle.container}>
-                <ScrollView style={customStyle.scrollView}>
+            <SafeAreaView style={{ flex: 1, padding: 12 }}>
+                <ScrollView style={{ flex: 1 }}>
                     <View>
                         <Button
                             title="Utils"
@@ -24,6 +24,10 @@ class LandingView extends Component {
                         <Button
                             title="Drawer"
                             onPress={() => this.props.navigation.navigate('Drawer')}
+                        />
+                        <Button
+                            title="Push Notification"
+                            onPress={() => this.props.navigation.navigate('PushNotification')}
                         />
                         <Button
                             title="Bottom Tab"
