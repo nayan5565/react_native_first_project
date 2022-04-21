@@ -22,6 +22,10 @@ class LandingView extends Component {
                             onPress={() => this.props.navigation.navigate('Home')}
                         />
                         <Button
+                            title="Download"
+                            onPress={() => this.props.navigation.navigate('Download')}
+                        />
+                        <Button
                             title="Drawer"
                             onPress={() => this.props.navigation.navigate('Drawer')}
                         />

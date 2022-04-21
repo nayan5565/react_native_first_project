@@ -2,7 +2,9 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { createChannel, handleNotification, handleScheduleNotification, notificationSpecifiqueTime, cancelAllNotification, setRepeatingNotification } from '../components/LocalNotification';
+import fonts from '../constants/fonts';
 import GlobalStyle from '../constants/GlobalStyle';
+
 
 
 
@@ -18,7 +20,7 @@ const PushNotificationScreen = (props) => {
             <TouchableOpacity
                 style={{ backgroundColor: 'teal', borderRadius: 12, paddingHorizontal: 16, paddingVertical: 12 }}
                 onPress={() => handleNotification()}>
-                <Text style={{ color: 'white' }}> Fire notification</Text>
+                <Text style={{ color: 'white', fontFamily: fonts.mySoul }}> Fire notification</Text>
             </TouchableOpacity>
             <TouchableOpacity style={GlobalStyle.bottomCard} onPress={() => { notificationSpecifiqueTime() }}>
                 <Text style={GlobalStyle.whiteText}>SpecificTime</Text>
@@ -26,18 +28,18 @@ const PushNotificationScreen = (props) => {
             <TouchableOpacity
                 style={{ backgroundColor: 'teal', borderRadius: 12, marginTop: 12, paddingHorizontal: 16, paddingVertical: 12 }}
                 onPress={() => handleScheduleNotification()}>
-                <Text style={{ color: 'white', fontFamily: 'MySoul-Regular' }}> Fire schedule notification</Text>
+                <Text style={{ color: 'white', fontFamily: fonts.mySoul }}> Fire schedule notification</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.primaryButton} onPress={() => { setRepeatingNotification("every 30 seconds") }}>
-                <Text style={{ fontFamily: 'DancingScript-Medium' }}>every 30 seconds</Text>
+                <Text style={{ fontFamily: fonts.dancingMedium }}>every 30 seconds</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.primaryButton} onPress={() => { setRepeatingNotification("once in two days") }}>
-                <Text style={{ fontFamily: 'DancingScript-Bold' }}>once in two days</Text>
+                <Text style={{ fontFamily: fonts.dancingBold }}>once in two days</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.primaryButton} onPress={() => { setRepeatingNotification("once a week") }}>
-                <Text style={{ fontFamily: 'DancingScript-Regular' }}>once a week</Text>
+                <Text style={{ fontFamily: fonts.dancingRegular }}>once a week</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.secondaryButton} onPress={() => { cancelAllNotification() }}>
