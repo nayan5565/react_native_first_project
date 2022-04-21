@@ -22,6 +22,10 @@ class LandingView extends Component {
                             onPress={() => this.props.navigation.navigate('Home')}
                         />
                         <Button
+                            title="Firebase"
+                            onPress={() => this.props.navigation.navigate('FirebaseAuthDesign')}
+                        />
+                        <Button
                             title="Download"
                             onPress={() => this.props.navigation.navigate('Download')}
                         />

@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
 
-const CustomBtn = ({ onPress = () => { }, btnStyle = {}, txtStyle = {}, btnText }) => {
+const CustomBtn = ({ onPress = () => { }, btnStyle = {}, txtStyle = {}, btnText, loading }) => {
     return (
         <TouchableOpacity onPress={onPress} style={{ ...style.btnStyle, ...btnStyle }}>
-            <Text style={{ ...txtStyle }}>{btnText}</Text>
+            {loading ? <ActivityIndicator color='white' /> : <Text style={{ ...txtStyle }}>{btnText}</Text>}
         </TouchableOpacity>
     );
 }

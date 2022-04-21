@@ -32,6 +32,9 @@ import MyBottomSheet from './src/components/MyBottomSheet';
 import BarCodeScannerScreen from './src/views/BarCodeScannerScreen';
 import PushNotificationScreen from './src/views/PushNotificationScreen';
 import DownloadFileScreen from './src/views/DownloadFileScreen';
+import PhoneOtpScreen from './src/views/PhoneOtpScreen';
+import FirebaseAuthDesign from './src/components/FirebaseAuthDesign';
+import SignEmailScreen from './src/views/SignEmailScreen';
 // import SQLite from 'react-native-sqlite-storage';
 
 // global.db = SQLite.openDatabase(
@@ -57,6 +60,9 @@ class App extends Component {
           <Stack.Navigator initialRouteName="Splash">
             <Stack.Screen name="Splash" component={SplashView} options={{ headerShown: false }} />
             <Stack.Screen name="Redux" component={homeScreenNew} />
+            <Stack.Screen name="FirebaseAuthDesign" component={FirebaseAuthDesign} />
+            <Stack.Screen name="SignEmail" component={SignEmailScreen} />
+            <Stack.Screen name="PhoneOTP" component={PhoneOtpScreen} />
             <Stack.Screen name="Download" component={DownloadFileScreen} />
             <Stack.Screen name="PushNotification" component={PushNotificationScreen} />
             <Stack.Screen name="Drawer" component={MyDrawer} options={{ headerShown: false }} />

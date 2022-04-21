@@ -9,8 +9,6 @@ const DownloadFileScreen = () => {
     const [errMsg, setErrMsg] = useState("")
     const [loading, setLoading] = useState(false)
 
-    var msg = errMsg;
-
     const checkPermission = async () => {
         if (Platform.OS === 'ios') {
             downloadImage()
