@@ -31,14 +31,14 @@ export const notificationConfigue = () => {
     })
 }
 
-export const handleNotification = () => {
+export const handleNotification = (title, msg, bigText) => {
     PushNotification.localNotification({
         /* Android Only Properties */
         channelId: "nayan",
-        title: 'First',
-        message: 'come notification export',
-        id: 1,
-        bigText: "My big text that will be shown when notification is expanded. Styling can be done using",
+        title: title,
+        message: msg,
+        // id: 1,
+        bigText: bigText,
     });
 }
 

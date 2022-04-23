@@ -19,7 +19,7 @@ const PushNotificationScreen = (props) => {
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <TouchableOpacity
                 style={{ backgroundColor: 'teal', borderRadius: 12, paddingHorizontal: 16, paddingVertical: 12 }}
-                onPress={() => handleNotification()}>
+                onPress={() => handleNotification('Hello', 'message Body')}>
                 <Text style={{ color: 'white', fontFamily: fonts.mySoul }}> Fire notification</Text>
             </TouchableOpacity>
             <TouchableOpacity style={GlobalStyle.bottomCard} onPress={() => { notificationSpecifiqueTime() }}>

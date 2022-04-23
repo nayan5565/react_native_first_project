@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import messaging from '@react-native-firebase/messaging';
+import { handleNotification } from '../components/LocalNotification';
 
 export async function requestUserPermission() {
     const authStatus = await messaging().requestPermission();
@@ -54,6 +55,7 @@ export const NotificationListner = () => {
 
     messaging().onMessage(async remoteMessage => {
         console.log('FCM Notification on forground state===>', remoteMessage)
+        handleNotification(remoteMessage.notification.title, remoteMessage.notification.body)
     })
 }
 
