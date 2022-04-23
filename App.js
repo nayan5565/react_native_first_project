@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LandingView from './src/views/landingView';
@@ -35,6 +35,7 @@ import DownloadFileScreen from './src/views/DownloadFileScreen';
 import PhoneOtpScreen from './src/views/PhoneOtpScreen';
 import FirebaseAuthDesign from './src/components/FirebaseAuthDesign';
 import SignEmailScreen from './src/views/SignEmailScreen';
+import { requestUserPermission, NotificationListner } from './src/helper/PushNotificationHelper';
 // import SQLite from 'react-native-sqlite-storage';
 
 // global.db = SQLite.openDatabase(
@@ -51,47 +52,51 @@ import SignEmailScreen from './src/views/SignEmailScreen';
 
 const store = createStore(allReducers, applyMiddleware(thunk));
 const Stack = createNativeStackNavigator();
-class App extends Component {
+const App = () => {
 
-  render() {
-    return (
-      <Provider store={store}>
-        <NavigationContainer >
-          <Stack.Navigator initialRouteName="Splash">
-            <Stack.Screen name="Splash" component={SplashView} options={{ headerShown: false }} />
-            <Stack.Screen name="Redux" component={homeScreenNew} />
-            <Stack.Screen name="FirebaseAuthDesign" component={FirebaseAuthDesign} />
-            <Stack.Screen name="SignEmail" component={SignEmailScreen} />
-            <Stack.Screen name="PhoneOTP" component={PhoneOtpScreen} />
-            <Stack.Screen name="Download" component={DownloadFileScreen} />
-            <Stack.Screen name="PushNotification" component={PushNotificationScreen} />
-            <Stack.Screen name="Drawer" component={MyDrawer} options={{ headerShown: false }} />
-            <Stack.Screen name="BottomTab" component={MyBottomTab} options={{ headerShown: false }} />
-            <Stack.Screen name="CustomBottomTab" component={CustomBottomTab} options={{ headerShown: false }} />
-            <Stack.Screen name="TabBar" component={MyTab} options={{ headerShown: false }} />
-            <Stack.Screen name="Signup" component={SignupView} options={{ headerShown: false }} />
-            <Stack.Screen name="OnBoard" component={OnBoarding} />
-            <Stack.Screen name="BottomSheet" component={MyBottomSheet} />
-            <Stack.Screen name="Friends" component={friendsScreen} />
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="ChooseLocation" component={ChooseLocation} />
-            <Stack.Screen name="Map" component={MapScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="Details" component={DetailsScreen} />
-            <Stack.Screen name="Database" component={DatabaseView} />
-            <Stack.Screen name="ReduxHook" component={ChangeData} />
-            <Stack.Screen name="List" component={ListItemView} />
-            <Stack.Screen name="Landing" component={LandingView} />
-            <Stack.Screen name="Api" component={ApiCallView} />
-            <Stack.Screen name="Utils" component={UtilsView} />
-            <Stack.Screen name="Login" component={LoginView} options={{ headerShown: false }} />
-            <Stack.Screen name="ApiFunc" component={ApiCallInFunctionComponent} />
-          </Stack.Navigator>
-          <FlashMessage position='top' />
-        </NavigationContainer>
-      </Provider>
+  useEffect(() => {
+    requestUserPermission()
+    NotificationListner()
+  }, [])
 
-    );
-  }
+  return (
+    <Provider store={store}>
+      <NavigationContainer >
+        <Stack.Navigator initialRouteName="Splash">
+          <Stack.Screen name="Splash" component={SplashView} options={{ headerShown: false }} />
+          <Stack.Screen name="Redux" component={homeScreenNew} />
+          <Stack.Screen name="FirebaseAuthDesign" component={FirebaseAuthDesign} />
+          <Stack.Screen name="SignEmail" component={SignEmailScreen} />
+          <Stack.Screen name="PhoneOTP" component={PhoneOtpScreen} />
+          <Stack.Screen name="Download" component={DownloadFileScreen} />
+          <Stack.Screen name="PushNotification" component={PushNotificationScreen} />
+          <Stack.Screen name="Drawer" component={MyDrawer} options={{ headerShown: false }} />
+          <Stack.Screen name="BottomTab" component={MyBottomTab} options={{ headerShown: false }} />
+          <Stack.Screen name="CustomBottomTab" component={CustomBottomTab} options={{ headerShown: false }} />
+          <Stack.Screen name="TabBar" component={MyTab} options={{ headerShown: false }} />
+          <Stack.Screen name="Signup" component={SignupView} options={{ headerShown: false }} />
+          <Stack.Screen name="OnBoard" component={OnBoarding} />
+          <Stack.Screen name="BottomSheet" component={MyBottomSheet} />
+          <Stack.Screen name="Friends" component={friendsScreen} />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="ChooseLocation" component={ChooseLocation} />
+          <Stack.Screen name="Map" component={MapScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Details" component={DetailsScreen} />
+          <Stack.Screen name="Database" component={DatabaseView} />
+          <Stack.Screen name="ReduxHook" component={ChangeData} />
+          <Stack.Screen name="List" component={ListItemView} />
+          <Stack.Screen name="Landing" component={LandingView} />
+          <Stack.Screen name="Api" component={ApiCallView} />
+          <Stack.Screen name="Utils" component={UtilsView} />
+          <Stack.Screen name="Login" component={LoginView} options={{ headerShown: false }} />
+          <Stack.Screen name="ApiFunc" component={ApiCallInFunctionComponent} />
+        </Stack.Navigator>
+        <FlashMessage position='top' />
+      </NavigationContainer>
+    </Provider>
+
+  );
+
 }
 
 export default App;

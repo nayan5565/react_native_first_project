@@ -131,7 +131,7 @@ android {
     compileSdkVersion 31
 
     defaultConfig {
-        applicationId "com.myfirstproject"
+        applicationId "com.nayan.myfirstproject"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -7,7 +7,7 @@ export const notificationConfigue = () => {
     PushNotification.configure({
         // (required) Called when a remote is received or opened, or local notification is opened
         onNotification: function (notification) {
-            console.log("NOTIFICATION:", notification);
+            console.log("NOTIFICATION Local:", notification);
 
         },
 
@@ -20,12 +20,12 @@ export const notificationConfigue = () => {
         },
 
         // (optional) Called when the user fails to register for remote notifications. Typically occurs when APNS is having issues, or the device is a simulator. (iOS)
-        onRegistrationError: function (err) {
-            console.error(err.message, err);
-        },
+        // onRegistrationError: function (err) {
+        //     console.error(err.message, err);
+        // },
         //if you are not using remote notification or do not have Firebase installed, use this:
-        // requestPermissions: Platform.OS === 'ios'
-        requestPermissions: true,
+        requestPermissions: Platform.OS === 'ios'
+        // requestPermissions: true,
 
 
     })
