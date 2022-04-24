@@ -36,6 +36,7 @@ import PhoneOtpScreen from './src/views/PhoneOtpScreen';
 import FirebaseAuthDesign from './src/components/FirebaseAuthDesign';
 import SignEmailScreen from './src/views/SignEmailScreen';
 import { requestUserPermission, NotificationListner } from './src/helper/PushNotificationHelper';
+import GoogleSigninScreen from './src/views/GoogleSigninScreen';
 // import SQLite from 'react-native-sqlite-storage';
 
 // global.db = SQLite.openDatabase(
@@ -69,6 +70,7 @@ const App = () => {
           <Stack.Screen name="SignEmail" component={SignEmailScreen} />
           <Stack.Screen name="PhoneOTP" component={PhoneOtpScreen} />
           <Stack.Screen name="Download" component={DownloadFileScreen} />
+          <Stack.Screen name="Google" component={GoogleSigninScreen} />
           <Stack.Screen name="PushNotification" component={PushNotificationScreen} />
           <Stack.Screen name="Drawer" component={MyDrawer} options={{ headerShown: false }} />
           <Stack.Screen name="BottomTab" component={MyBottomTab} options={{ headerShown: false }} />
