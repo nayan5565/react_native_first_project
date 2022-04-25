@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "278308056726-ldqq88sauois1l8kimgmvl2lmknmemmt.apps.googleusercontent.com",
+          "client_id": "278308056726-58q4jh2r76j5l1ikva5tr3josdl5tagc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nayan.myfirstproject",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "278308056726-dogn8343dmdake4pfedaiet1t1f8a3l1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.nayan.myfirstproject",

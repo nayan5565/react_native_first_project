@@ -15,7 +15,7 @@ LogBox.ignoreAllLogs();//Ignore all log notifications
 notificationConfigue()
 handleBackgroundMsg()
 
-GoogleSignin.configure({
-    webClientId: '278308056726-ldqq88sauois1l8kimgmvl2lmknmemmt.apps.googleusercontent.com',
-});
+// GoogleSignin.configure({
+//     webClientId: '278308056726-ldqq88sauois1l8kimgmvl2lmknmemmt.apps.googleusercontent.com',
+// });
 AppRegistry.registerComponent(appName, () => App);

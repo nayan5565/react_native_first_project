@@ -114,9 +114,10 @@ const LoginView = ({ navigation }) => {
         // setUserData(loginData)
         console.log("userData: " + JSON.stringify(loginData))
         storeData(true)
-        navigation.replace('Database', {
-            users: loginData,
-        });
+        navigation.replace('Landing')
+        // navigation.replace('Database', {
+        //     users: loginData,
+        // });
     }
 
     const goSignupView = () => {

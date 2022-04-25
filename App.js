@@ -37,6 +37,7 @@ import FirebaseAuthDesign from './src/components/FirebaseAuthDesign';
 import SignEmailScreen from './src/views/SignEmailScreen';
 import { requestUserPermission, NotificationListner } from './src/helper/PushNotificationHelper';
 import GoogleSigninScreen from './src/views/GoogleSigninScreen';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 // import SQLite from 'react-native-sqlite-storage';
 
 // global.db = SQLite.openDatabase(
@@ -58,6 +59,11 @@ const App = () => {
   useEffect(() => {
     requestUserPermission()
     NotificationListner()
+    GoogleSignin.configure(
+      //   {
+      //   webClientId: '278308056726-ldqq88sauois1l8kimgmvl2lmknmemmt.apps.googleusercontent.com',
+      // }
+    );
   }, [])
 
   return (
