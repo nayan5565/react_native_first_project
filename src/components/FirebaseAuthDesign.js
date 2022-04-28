@@ -25,6 +25,13 @@ function FirebaseAuthDesign({ navigation }) {
                 btnText="Google Signin"
                 onPress={() => navigation.navigate('Google')}
             />
+
+            <CustomBtn
+                btnStyle={GlobalStyle.bottomCard}
+                txtStyle={GlobalStyle.whiteText}
+                btnText="FB Login"
+                onPress={() => navigation.navigate('FBLogin')}
+            />
         </View>
     );
 }
