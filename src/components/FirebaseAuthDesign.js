@@ -32,6 +32,13 @@ function FirebaseAuthDesign({ navigation }) {
                 btnText="FB Login"
                 onPress={() => navigation.navigate('FBLogin')}
             />
+
+            <CustomBtn
+                btnStyle={GlobalStyle.bottomCard}
+                txtStyle={GlobalStyle.whiteText}
+                btnText="Twitter Login"
+                onPress={() => navigation.navigate('Twitter')}
+            />
         </View>
     );
 }

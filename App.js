@@ -39,6 +39,7 @@ import { requestUserPermission, NotificationListner } from './src/helper/PushNot
 import GoogleSigninScreen from './src/views/GoogleSigninScreen';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import FBLoginScreen from './src/views/FBLoginScreen';
+import TwitterSigin from './src/views/TwitterSigin';
 // import SQLite from 'react-native-sqlite-storage';
 
 // global.db = SQLite.openDatabase(
@@ -76,6 +77,7 @@ const App = () => {
           <Stack.Screen name="FirebaseAuthDesign" component={FirebaseAuthDesign} />
           <Stack.Screen name="SignEmail" component={SignEmailScreen} />
           <Stack.Screen name="FBLogin" component={FBLoginScreen} />
+          <Stack.Screen name="Twitter" component={TwitterSigin} />
           <Stack.Screen name="PhoneOTP" component={PhoneOtpScreen} />
           <Stack.Screen name="Download" component={DownloadFileScreen} />
           <Stack.Screen name="Google" component={GoogleSigninScreen} />
