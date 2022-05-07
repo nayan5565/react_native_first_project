@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Button, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
+import auth from '@react-native-firebase/auth';
 import { GoogleSignin, statusCodes, GoogleSigninButton } from '@react-native-google-signin/google-signin';
 
 const GoogleSigninScreen = (props) => {
 
 
     const [isSigned, setSigned] = useState(false)
+    const [email, setEmail] = useState('')
 
     useEffect(() => {
         isSignedIn()
@@ -40,6 +42,8 @@ const GoogleSigninScreen = (props) => {
             try {
                 await GoogleSignin.hasPlayServices();
                 const userInfo = await GoogleSignin.signIn();
+                setSigned(true)
+                setEmail(userInfo.user.email)
                 console.log('userInfo==>', userInfo)
             } catch (error) {
                 console.log('googlesignInError==>', error)
@@ -60,12 +64,15 @@ const GoogleSigninScreen = (props) => {
     const getCurrentUser = async () => {
         const currentUser = await GoogleSignin.getCurrentUser();
         console.log('currentUser==>', currentUser)
+        setEmail(currentUser.user.email)
 
     };
 
     const signOut = async () => {
         try {
             await GoogleSignin.signOut();
+            setSigned(false)
+            setEmail('')
             console.log('signOut');
         } catch (error) {
             console.error(error);
@@ -81,13 +88,20 @@ const GoogleSigninScreen = (props) => {
                 onPress={() => onGoogleButtonPress()}
 
             /> */}
-            <GoogleSigninButton
-                style={{ width: 192, height: 48 }}
-                size={GoogleSigninButton.Size.Wide}
-                color={GoogleSigninButton.Color.Light}
-                onPress={() => signIn()}
 
-            />
+            {isSigned ?
+                <Text>{email}</Text> :
+                null}
+            <View style={{ marginTop: 24 }} />
+            {isSigned ?
+                <Button title='Signout' onPress={() => signOut()} /> :
+                <GoogleSigninButton
+                    style={{ width: 192, height: 48, marginTop: 24 }}
+                    size={GoogleSigninButton.Size.Wide}
+                    color={GoogleSigninButton.Color.Light}
+                    onPress={() => signIn()}
+
+                />}
         </View>
     );
 }
