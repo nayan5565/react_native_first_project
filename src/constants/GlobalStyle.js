@@ -42,4 +42,17 @@ export default StyleSheet.create({
         color: '#05375a',
     },
 
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#222831'
+    },
+    mainContainer: {
+        flex: 1,
+        backgroundColor: '#222831',
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+
 })

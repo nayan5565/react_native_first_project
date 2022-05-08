@@ -1,5 +1,6 @@
 package com.nayan.myfirstproject;
 
+import com.asterinet.react.bgactions.BackgroundActionsPackage;
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
           // packages.add(new VisionCameraDynamsoftBarcodeReaderPackage());
+          // packages.add(new BackgroundActionsPackage());
           return packages;
         }
 

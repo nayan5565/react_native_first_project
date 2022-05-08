@@ -42,6 +42,7 @@ import FBLoginScreen from './src/views/FBLoginScreen';
 import TwitterSigin from './src/views/TwitterSigin';
 import PhoneInputField from './src/components/PhoneInputField';
 import OTPInputField from './src/components/OTPInputField';
+import AudioPlayerView from './src/views/AudioPlayerView';
 // import SQLite from 'react-native-sqlite-storage';
 
 // global.db = SQLite.openDatabase(
@@ -80,6 +81,7 @@ const App = () => {
           <Stack.Screen name="SignEmail" component={SignEmailScreen} />
           <Stack.Screen name="FBLogin" component={FBLoginScreen} />
           <Stack.Screen name="OTP" component={OTPInputField} />
+          <Stack.Screen name="AudioPlayer" component={AudioPlayerView} />
           <Stack.Screen name="Twitter" component={TwitterSigin} />
           <Stack.Screen name="PhoneOTP" component={PhoneOtpScreen} />
           <Stack.Screen name="Download" component={DownloadFileScreen} />
