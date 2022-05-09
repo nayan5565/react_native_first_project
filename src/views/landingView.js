@@ -46,6 +46,11 @@ class LandingView extends Component {
                             title="Audo Player"
                             onPress={() => this.props.navigation.navigate('AudioPlayer')}
                         />
+
+                        <Button
+                            title="Video Player"
+                            onPress={() => this.props.navigation.navigate('VideoPlayer')}
+                        />
                         <Button
                             title="Push Notification"
                             onPress={() => this.props.navigation.navigate('PushNotification')}

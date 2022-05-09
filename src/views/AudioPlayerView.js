@@ -65,8 +65,11 @@ const AudioPlayerView = () => {
         if (event.type === Event.PlaybackTrackChanged && event.nextTrack != null) {
             if (State.Ready) {
                 console.log('Ready')
-                TrackPlayer.setRepeatMode(RepeatMode.Off)
-                setRepeatMode('off')
+                // TrackPlayer.setRepeatMode(RepeatMode.Off)
+                // setRepeatMode('off')
+            }
+            if (State.Stopped) {
+                console.log('Stopped')
             }
             const track = await TrackPlayer.getTrack(event.nextTrack);
             const { title, artist, artwork } = track;
