@@ -62,7 +62,12 @@ const AudioPlayerView = () => {
     const songSlider = useRef(null)
 
     useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
-        if (event.type === Event.PlaybackTrackChanged && event.nextTrack !== null) {
+        if (event.type === Event.PlaybackTrackChanged && event.nextTrack != null) {
+            if (State.Ready) {
+                console.log('Ready')
+                TrackPlayer.setRepeatMode(RepeatMode.Off)
+                setRepeatMode('off')
+            }
             const track = await TrackPlayer.getTrack(event.nextTrack);
             const { title, artist, artwork } = track;
             setArtist(artist)
@@ -188,7 +193,7 @@ const AudioPlayerView = () => {
 
                     <View style={styless.progressLabelContainer}>
                         <Text style={styless.progressLabelText}>{secondsToHms2(progress.position)}</Text>
-                        <Text style={styless.progressLabelText}>{secondsToHms2(progress.duration - progress.position)}</Text>
+                        <Text style={styless.progressLabelText}>{progress.position < progress.duration ? secondsToHms2(progress.duration - progress.position) : '00:00'}</Text>
                     </View>
                 </View>
 
