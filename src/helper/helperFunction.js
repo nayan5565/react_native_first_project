@@ -61,3 +61,37 @@ export {
     showError,
     showSuccess
 }
+
+export const millisToMinutesAndSeconds = (millis) => {
+    let minutes = Math.floor(millis / 60000);
+    let seconds = ((millis % 60000) / 1000).toFixed(0);
+    return (seconds == 60 ? (minutes + 1) + ":00" : minutes + ":" + (seconds < 10 ? "0" :
+        "") + seconds);
+}
+
+export const secondsToHms = (d) => {
+    d = Number(d);
+    var h = Math.floor(d / 3600);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
+
+    var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
+    var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+    return hDisplay + mDisplay + sDisplay;
+}
+
+export const secondsToHms2 = (d) => {
+    d = Number(d);
+    var h = Math.floor(d / 3600);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
+
+    var hDisplay = h > 0 ? h + (h == 1 ? ":" : ":") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? ":" : ":") : "00:";
+    var sDisplay = s > 0 ? s + (s < 10 ? "0" : "") : "00";
+    // return hDisplay + mDisplay + sDisplay;
+    return (s == 60 ? (m + 1) + ":00" : (m < 10 ? "0" :
+        "") + m + ":" + (s < 10 ? "0" :
+            "") + s);
+}

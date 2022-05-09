@@ -11,6 +11,7 @@ import { handleBackgroundMsg } from './src/helper/PushNotificationHelper';
 import BackgroundService from 'react-native-background-actions';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import backgroundServer from './src/components/BackgroundService';
+import TrackPlayer from 'react-native-track-player';
 const { RNTwitterSignIn } = NativeModules;
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
@@ -54,5 +55,6 @@ const options = {
 // backgroundServer.start(veryIntensiveTask, options)
 // backgroundServer.updateNotification('New ExampleTask description');
 
+TrackPlayer.registerPlaybackService(() => require('./service'));
 
 AppRegistry.registerComponent(appName, () => App);

@@ -2,14 +2,35 @@ import React, { useEffect, useRef, useState } from 'react';
 import TrackPlayer, { State, Event, RepeatMode, usePlaybackState, useProgress, Capability, useTrackPlayerEvents } from 'react-native-track-player'
 import Slider from '@react-native-community/slider'
 import IonIcons from 'react-native-vector-icons/Ionicons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { View, SafeAreaView, Text, StyleSheet, Animated, Dimensions, TouchableOpacity, Image, FlatList } from 'react-native';
 import audio from '../constants/audio'
 import styles from '../constants/GlobalStyle'
+import { secondsToHms2 } from '../helper/helperFunction';
+import { event } from 'react-native-reanimated';
 
 const { width, height } = Dimensions.get('window')
 
 const setupPlayer = async () => {
     await TrackPlayer.setupPlayer()
+    await TrackPlayer.updateOptions(
+        {
+            capabilities: [
+                Capability.Play,
+                Capability.Pause,
+                Capability.SkipToNext,
+                Capability.SkipToPrevious,
+                Capability.Stop
+            ],
+            compactCapabilities: [
+                Capability.Play,
+                Capability.Pause,
+                Capability.SkipToNext,
+                Capability.SkipToPrevious,
+                Capability.Stop
+            ],
+        }
+    )
 
     await TrackPlayer.add(audio);
 
@@ -27,19 +48,68 @@ const togglePlaback = async (playbackState) => {
     }
 }
 
+
 const AudioPlayerView = () => {
     const playbackState = usePlaybackState()
+    const progress = useProgress()
+
     const scrollx = useRef(new Animated.Value(0)).current;
     const [songIndext, setSongIndex] = useState(0)
+    const [repeatMode, setRepeatMode] = useState('off')
+    const [title, setTitle] = useState(0)
+    const [artwork, setArtwork] = useState(0)
+    const [artist, setArtist] = useState(0)
     const songSlider = useRef(null)
 
+    useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
+        if (event.type === Event.PlaybackTrackChanged && event.nextTrack !== null) {
+            const track = await TrackPlayer.getTrack(event.nextTrack);
+            const { title, artist, artwork } = track;
+            setArtist(artist)
+            setArtwork(artwork)
+            setTitle(title)
+        }
+    })
+
+    const repeatIcon = () => {
+        if (repeatMode === 'off') {
+            return 'repeat-off'
+        } else if (repeatMode === 'track') {
+            return 'repeat-once'
+        } else if (repeatMode === 'repeat') {
+            return 'repeat'
+        }
+    }
+
+    const changeRepeatMode = () => {
+        if (repeatMode === 'off') {
+            TrackPlayer.setRepeatMode(RepeatMode.Track)
+            setRepeatMode('track')
+        } else if (repeatMode === 'track') {
+            TrackPlayer.setRepeatMode(RepeatMode.Queue)
+            setRepeatMode('repeat')
+        } else if (repeatMode === 'repeat') {
+            TrackPlayer.setRepeatMode(RepeatMode.Off)
+            setRepeatMode('off')
+        }
+    }
+
     useEffect(() => {
+        setupPlayer()
         scrollx.addListener(({ value }) => {
             const index = Math.round(value / width)
+            skipTo(index)
             setSongIndex(index)
         });
-        return () => { scrollx.removeAllListeners() }
+        return () => {
+            scrollx.removeAllListeners()
+            TrackPlayer.destroy()
+        }
     }, []);
+
+    const skipTo = async (trackId) => {
+        await TrackPlayer.skip(trackId)
+    }
 
     const skipToNext = () => {
         // songSlider.current.scrollToOffset({
@@ -66,7 +136,7 @@ const AudioPlayerView = () => {
         return (
             <Animated.View style={{ width: width, justifyContent: 'center', alignItems: 'center' }}>
                 <View style={styless.artworkWrapper}>
-                    <Image source={item.artwork} style={styless.artworkImg} />
+                    <Image source={artwork} style={styless.artworkImg} />
                 </View>
             </Animated.View>
         );
@@ -100,25 +170,25 @@ const AudioPlayerView = () => {
                 </View>
 
                 <View>
-                    <Text style={styless.title}>{audio[songIndext].title}</Text>
-                    <Text style={styless.artist}>Artist</Text>
+                    <Text style={styless.title}>{title}</Text>
+                    <Text style={styless.artist}>{artist}</Text>
                 </View>
 
                 <View>
                     <Slider
                         style={styless.progressContainer}
-                        value={10}
+                        value={progress.position}
                         minimumValue={0}
-                        maximumValue={100}
+                        maximumValue={progress.duration}
                         thumbTintColor="#FFD369"
                         minimumTrackTintColor='#FFD369'
                         maximumTrackTintColor='#FFF'
-                        onSlidingComplete={() => { }}
+                        onSlidingComplete={async (value) => { await TrackPlayer.seekTo(value) }}
                     />
 
                     <View style={styless.progressLabelContainer}>
-                        <Text style={styless.progressLabelText}>0:00</Text>
-                        <Text style={styless.progressLabelText}>3:55</Text>
+                        <Text style={styless.progressLabelText}>{secondsToHms2(progress.position)}</Text>
+                        <Text style={styless.progressLabelText}>{secondsToHms2(progress.duration - progress.position)}</Text>
                     </View>
                 </View>
 
@@ -126,8 +196,8 @@ const AudioPlayerView = () => {
                     <TouchableOpacity onPress={() => skipToPrevious()}>
                         <IonIcons name='play-skip-back-outline' size={30} color='#FFD369' />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { }}>
-                        <IonIcons name='ios-pause-circle' size={60} color='#FFD369' />
+                    <TouchableOpacity onPress={() => togglePlaback(playbackState)}>
+                        <IonIcons name={playbackState === State.Playing ? 'ios-pause-circle' : 'ios-play-circle'} size={60} color='#FFD369' />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => skipToNext()}>
                         <IonIcons name='play-skip-forward-outline' size={30} color='#FFD369' />
@@ -149,8 +219,8 @@ const AudioPlayerView = () => {
                         <IonIcons name='heart-outline' size={30} color='#777777' />
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => { }}>
-                        <IonIcons name='repeat' size={30} color='#777777' />
+                    <TouchableOpacity onPress={() => changeRepeatMode()}>
+                        <MaterialCommunityIcons name={repeatIcon()} size={30} color={repeatMode !== 'off' ? '#FFD369' : '#777777'} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { }}>
                         <IonIcons name='share-outline' size={30} color='#777777' />
