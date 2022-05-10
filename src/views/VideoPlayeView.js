@@ -1,16 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, StyleSheet, View } from 'react-native';
 import Video, { FilterType } from 'react-native-video';
 import VideoPlayer from 'react-native-video-controls';
 import imagePath from '../constants/imagePath'
 
+
 const VideoPlayeView = (props) => {
+    const videoRef = useRef(null)
     const [filterType, setFilterType] = useState(FilterType.SEPIA)
     const [external, setExternal] = useState(false)
+    const [android, setAndroid] = useState(false)
 
     const changeFilter = (filter) => {
         setFilterType(filter)
     }
+
+    const onBuffer = (e) => {
+        console.log('buffer===>', e)
+    }
+
+    const onError = (e) => {
+        console.log('error===>', e)
+    }
+
+    useEffect(() => {
+        console.log('VideoRef===>', videoRef)
+    }, [])
 
     // better for ios
     const VideoPlayerIos = () => {
@@ -18,7 +33,11 @@ const VideoPlayeView = (props) => {
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Video
                     source={external ? imagePath.video : { uri: 'https://www.w3schools.com/html/mov_bbb.mp4' }}   // Can be a URL or a local file.
-                    // Callback when video cannot be loaded
+                    poster='https://baconmockup.com/300/200/'
+                    posterResizeMode='cover'
+                    onBuffer={onBuffer}
+                    onError={onError}
+                    ref={videoRef}
                     style={styles.backgroundVideo}
                     controls
                     repeat
@@ -31,6 +50,7 @@ const VideoPlayeView = (props) => {
                     <Button title='Sepia' onPress={() => changeFilter(FilterType.SEPIA)} />
                     <Button title='Chrome' onPress={() => changeFilter(FilterType.CHROME)} />
                     <Button title={external ? 'Play Online' : 'Play Local'} onPress={() => { setExternal(!external) }} />
+                    <Button title='Android' onPress={() => setAndroid(true)} />
                 </View>
             </View>
         );
@@ -48,12 +68,13 @@ const VideoPlayeView = (props) => {
                 <View style={styles.filterView}>
 
                     <Button title={external ? 'Play Online' : 'Play Local'} onPress={() => { setExternal(!external) }} />
+                    <Button title='Ios' onPress={() => setAndroid(false)} />
                 </View>
             </View>
         );
     }
     return (
-        <VideoPlayerIos />
+        android ? <VideoPlayerAndroid /> : <VideoPlayerIos />
     );
 }
 
