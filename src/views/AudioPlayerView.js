@@ -15,6 +15,7 @@ const setupPlayer = async () => {
     await TrackPlayer.setupPlayer()
     await TrackPlayer.updateOptions(
         {
+            stopWithApp: true,
             capabilities: [
                 Capability.Play,
                 Capability.Pause,
