@@ -45,6 +45,7 @@ import OTPInputField from './src/components/OTPInputField';
 import AudioPlayerView from './src/views/AudioPlayerView';
 import VideoPlayeView from './src/views/VideoPlayeView';
 import PickFileView from './src/views/PickFileView';
+import ScreenshotView from './src/views/ScreenshotView';
 // import SQLite from 'react-native-sqlite-storage';
 
 // global.db = SQLite.openDatabase(
@@ -82,6 +83,7 @@ const App = () => {
           <Stack.Screen name="FirebaseAuthDesign" component={FirebaseAuthDesign} />
           <Stack.Screen name="SignEmail" component={SignEmailScreen} />
           <Stack.Screen name="FBLogin" component={FBLoginScreen} />
+          <Stack.Screen name="Screenshot" component={ScreenshotView} />
           <Stack.Screen name="OTP" component={OTPInputField} />
           <Stack.Screen name="AudioPlayer" component={AudioPlayerView} />
           <Stack.Screen name="PickFile" component={PickFileView} />

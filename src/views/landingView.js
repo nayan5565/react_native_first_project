@@ -42,6 +42,10 @@ class LandingView extends Component {
                             onPress={() => this.props.navigation.navigate('Drawer')}
                         />
                         <Button
+                            title="Screenshot"
+                            onPress={() => this.props.navigation.navigate('Screenshot')}
+                        />
+                        <Button
                             title="Pick File"
                             onPress={() => this.props.navigation.navigate('PickFile')}
                         />

@@ -18,6 +18,8 @@ target 'MyFirstProject' do
 
   pod 'react-native-video', :path => '../node_modules/react-native-video'
 
+  pod 'react-native-view-shot', :path => '../node_modules/react-native-view-shot'
+
   target 'MyFirstProjectTests' do
     inherit! :complete
     # Pods for testing
