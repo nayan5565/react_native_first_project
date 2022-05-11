@@ -30,6 +30,10 @@ class LandingView extends Component {
                             onPress={() => this.props.navigation.navigate('Download')}
                         />
                         <Button
+                            title="Dropdown"
+                            onPress={() => this.props.navigation.navigate('Dropdown')}
+                        />
+                        <Button
                             title="Phone Input Field"
                             onPress={() => this.props.navigation.navigate('PhoneField')}
                         />
