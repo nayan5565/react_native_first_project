@@ -71,7 +71,7 @@ const DownloadFileScreen = () => {
                 setErrMsg('something wrong')
                 console.log('errorMessage==>', errorMessage)
             })
-            ;
+
 
 
 
