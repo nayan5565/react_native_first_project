@@ -22,6 +22,10 @@ target 'MyFirstProject' do
 
   pod 'RNFS', :path => '../node_modules/react-native-fs'
 
+  pod 'RNImageToPdf', :path => '../node_modules/react-native-image-to-pdf'
+
+  pod 'RNShare', :path => '../node_modules/react-native-share'
+
   target 'MyFirstProjectTests' do
     inherit! :complete
     # Pods for testing
