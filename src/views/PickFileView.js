@@ -1,29 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
 import TrackPlayer, { State, Event, RepeatMode, usePlaybackState, useProgress, Capability, useTrackPlayerEvents } from 'react-native-track-player'
 import Slider from '@react-native-community/slider'
+import { Searchbar } from 'react-native-paper';
 
 const setupPlayer = async () => {
     await TrackPlayer.setupPlayer()
 }
-const initialList = [
-
-];
+const initialList = [];
 
 function PickFileView(props) {
     const progress = useProgress()
     const [audioPlay, setAudioPlay] = useState(false)
-    const [list, setList] = useState(initialList);
+    const [list, setList] = useState([]);
 
     useEffect(() => {
         setupPlayer()
 
-        return () => {
+        // return () => {
 
-            TrackPlayer.destroy()
-        }
+        //     TrackPlayer.destroy()
+        // }
     }, []);
+
+
 
     const pickSignleFile = async () => {
         // Pick a single file
@@ -68,8 +69,8 @@ function PickFileView(props) {
                     artist: res.type,
                 };
 
-                const newList = list.push(track)
-                setList(newList);
+                initialList.push(track)
+
 
                 console.log(
                     res.uri,
@@ -78,8 +79,9 @@ function PickFileView(props) {
                     res.size
                 );
             }
+            setList(initialList);
             console.log('list==>', list.length)
-            await TrackPlayer.add(list);
+            await TrackPlayer.add(initialList);
             await TrackPlayer.play()
             setAudioPlay(true)
         } catch (err) {
@@ -90,10 +92,33 @@ function PickFileView(props) {
             }
         }
     }
+
+    const ChildView = (title, subTitle) => {
+        return (
+            <View style={{ backgroundColor: 'gray', padding: 10, margin: 5, flex: 100, flexDirection: 'row' }}>
+
+                <View style={{ flex: 80, justifyContent: 'center', }}>
+                    <Text style={{ color: 'white' }}>{title}</Text>
+                    <Text style={{ color: 'white' }}>{subTitle}</Text>
+                </View>
+
+            </View>
+        )
+    }
+
+    const BuildListView = () => {
+        return (
+            <FlatList data={initialList} renderItem={({ item }) => ChildView(item.url, item.title)} />
+        )
+    }
     return (
-        <View>
-            <Button title='Pick single file' onPress={() => pickSignleFile()} />
-            <Button title='Pick multiple file' onPress={() => pickMultipleFile()} />
+        <View style={{ flex: 1 }}>
+            <View style={{ height: '70%' }}>
+
+                <Button title='Pick single file' onPress={() => pickSignleFile()} />
+                <Button title='Pick multiple file' onPress={() => pickMultipleFile()} />
+                <BuildListView />
+            </View>
             {audioPlay ? <Slider
                 style={styless.progressContainer}
                 value={progress.position}

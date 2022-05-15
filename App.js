@@ -49,6 +49,9 @@ import ScreenshotView from './src/views/ScreenshotView';
 import DropdownView from './src/views/DropdownView';
 import ChartView from './src/views/ChartView';
 import RadioCheckboxSwichView from './src/views/RadioCheckboxSwichAppbarView';
+import DateTimePickerView from './src/views/DateTimePickerView';
+import PlayAudioSdCardView from './src/views/PlayAudioSdCardView';
+import SearchView from './src/views/SearchView';
 // import SQLite from 'react-native-sqlite-storage';
 
 // global.db = SQLite.openDatabase(
@@ -87,11 +90,14 @@ const App = () => {
           <Stack.Screen name="SignEmail" component={SignEmailScreen} />
           <Stack.Screen name="FBLogin" component={FBLoginScreen} />
           <Stack.Screen name="Dropdown" component={DropdownView} />
+          <Stack.Screen name="DateTime" component={DateTimePickerView} />
           <Stack.Screen name="Chart" component={ChartView} options={{ headerShown: false }} />
           <Stack.Screen name="Radio" component={RadioCheckboxSwichView} options={{ headerShown: false }} />
           <Stack.Screen name="Screenshot" component={ScreenshotView} />
+          <Stack.Screen name="Search" component={SearchView} />
           <Stack.Screen name="OTP" component={OTPInputField} />
           <Stack.Screen name="AudioPlayer" component={AudioPlayerView} />
+          <Stack.Screen name="AudioPlayerSD" component={PlayAudioSdCardView} />
           <Stack.Screen name="PickFile" component={PickFileView} />
           <Stack.Screen name="VideoPlayer" component={VideoPlayeView} />
           <Stack.Screen name="Twitter" component={TwitterSigin} />

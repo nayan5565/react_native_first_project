@@ -46,6 +46,10 @@ class LandingView extends Component {
                             onPress={() => this.props.navigation.navigate('Drawer')}
                         />
                         <Button
+                            title="Date Time Picker"
+                            onPress={() => this.props.navigation.navigate('DateTime')}
+                        />
+                        <Button
                             title="Radio Checkbox Swich"
                             onPress={() => this.props.navigation.navigate('Radio')}
                         />
@@ -62,8 +66,16 @@ class LandingView extends Component {
                             onPress={() => this.props.navigation.navigate('PickFile')}
                         />
                         <Button
+                            title="Search"
+                            onPress={() => this.props.navigation.navigate('Search')}
+                        />
+                        <Button
                             title="Audo Player"
                             onPress={() => this.props.navigation.navigate('AudioPlayer')}
+                        />
+                        <Button
+                            title="Audo Player sd card"
+                            onPress={() => this.props.navigation.navigate('AudioPlayerSD')}
                         />
 
                         <Button
