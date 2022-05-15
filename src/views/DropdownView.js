@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
 import DropDownPicker from 'react-native-dropdown-picker';
-import { Menu, Button, Divider, Provider } from 'react-native-paper';
+import { Menu, Button, Divider, Provider, Appbar } from 'react-native-paper';
 import imagePath from '../constants/imagePath';
 import IonIcons from 'react-native-vector-icons/Ionicons'
 
@@ -25,6 +25,12 @@ function DropdownView(props) {
 
     const closeMenu = () => setVisible(false);
 
+    const _goBack = () => console.log('Went back');
+
+    const _handleSearch = () => console.log('Searching');
+
+    const _handleMore = () => openMenu();
+
     useEffect(() => {
         setItems(itemData)
     }, [])
@@ -32,13 +38,20 @@ function DropdownView(props) {
     return (
         <Provider>
             <View>
-
+                <Appbar.Header>
+                    <Appbar.BackAction onPress={_goBack} />
+                    <Appbar.Content title="Title" subtitle="Subtitle" />
+                    <Appbar.Action icon="magnify" onPress={_handleSearch} />
+                    <Appbar.Action icon="dots-vertical" onPress={_handleMore} />
+                </Appbar.Header>
                 <Menu
 
                     style={{ width: '30%', left: '65%', }}
                     visible={visible}
                     onDismiss={closeMenu}
-                    anchor={<Button style={{ width: '20%', left: '80%', top: 16, right: 24 }} onPress={openMenu}><IonIcons name='ios-menu-sharp' size={24} color='grey' /></Button>}>
+                    anchor={<Button style={{ width: '20%', left: '80%', top: 16, right: 24 }} onPress={openMenu}>
+                        <IonIcons name='ios-menu-sharp' size={24} color='grey' />
+                    </Button>}>
                     <Menu.Item onPress={() => closeMenu()} title="Item 1" />
                     <Menu.Item onPress={() => closeMenu()} title="Item 2" />
                     <Divider />

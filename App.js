@@ -47,6 +47,8 @@ import VideoPlayeView from './src/views/VideoPlayeView';
 import PickFileView from './src/views/PickFileView';
 import ScreenshotView from './src/views/ScreenshotView';
 import DropdownView from './src/views/DropdownView';
+import ChartView from './src/views/ChartView';
+import RadioCheckboxSwichView from './src/views/RadioCheckboxSwichAppbarView';
 // import SQLite from 'react-native-sqlite-storage';
 
 // global.db = SQLite.openDatabase(
@@ -85,6 +87,8 @@ const App = () => {
           <Stack.Screen name="SignEmail" component={SignEmailScreen} />
           <Stack.Screen name="FBLogin" component={FBLoginScreen} />
           <Stack.Screen name="Dropdown" component={DropdownView} />
+          <Stack.Screen name="Chart" component={ChartView} options={{ headerShown: false }} />
+          <Stack.Screen name="Radio" component={RadioCheckboxSwichView} options={{ headerShown: false }} />
           <Stack.Screen name="Screenshot" component={ScreenshotView} />
           <Stack.Screen name="OTP" component={OTPInputField} />
           <Stack.Screen name="AudioPlayer" component={AudioPlayerView} />

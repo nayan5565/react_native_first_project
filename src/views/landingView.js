@@ -46,6 +46,14 @@ class LandingView extends Component {
                             onPress={() => this.props.navigation.navigate('Drawer')}
                         />
                         <Button
+                            title="Radio Checkbox Swich"
+                            onPress={() => this.props.navigation.navigate('Radio')}
+                        />
+                        <Button
+                            title="Chart"
+                            onPress={() => this.props.navigation.navigate('Chart')}
+                        />
+                        <Button
                             title="Screenshot"
                             onPress={() => this.props.navigation.navigate('Screenshot')}
                         />
